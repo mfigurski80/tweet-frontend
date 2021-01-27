@@ -1,23 +1,24 @@
 <template>
   <div id="app">
-    <Graph :dataPoints="points" />
+    <LineGraph :chartData="points" />
   </div>
 </template>
 
 <script>
-import Graph from "./components/Graph.vue";
+import LineGraph from "./components/lineGraph.vue";
 
 export default {
   name: "App",
   components: {
-    Graph,
+    LineGraph,
   },
   data: () => ({
     points: [
-      { total: 10000 },
-      { total: 9000 },
-      { total: 9500 },
-      { total: 11000 },
+      { time: 5, total: 11, negative: 5, positive: 4 },
+      { time: 10, total: 10, negative: 4, positive: 3 },
+      { time: 15, total: 20, negative: 7, positive: 7 },
+      { time: 20, total: 15, negative: 10, positive: 4 },
+      { time: 25, total: 19, negative: 11, positive: 4 },
     ],
   }),
 };

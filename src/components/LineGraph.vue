@@ -1,15 +1,22 @@
 <template>
-  <div id="d3Graph"></div>
+  <div>
+    <StripePattern />
+    <div id="d3Graph"></div>
+  </div>
 </template>
 
 <script>
 import * as d3 from "d3";
+import StripePattern from "./StripePattern.vue";
 
 export default {
   name: "LineGraph",
-  props: ["chartData"],
+  props: ["chartData", "onSelect"],
+  components: {
+    StripePattern,
+  },
   data: () => ({
-    m: { top: 40, bottom: 20, left: 0, right: 10 },
+    m: { top: 40, bottom: 20, left: 0, right: 20 },
     selected: -1,
   }),
   mounted() {
@@ -75,14 +82,24 @@ export default {
       this.addLine(svg, dataX, dataYNegative, this.chartData, "negative");
       this.addLine(svg, dataX, dataYPositive, this.chartData, "positive");
 
-      // add hover groups
+      // add hover groups backgrounds
       const hoverGroups = svg
         .selectAll("hoverGroup")
         .data(this.chartData)
         .enter()
         .append("g")
-        .attr("class", "hoverGroup");
-
+        .attr("class", "hoverGroup")
+        .on("click", (e, d) => this.onSelect(d));
+      hoverGroups
+        .append("rect")
+        .attr("class", "rect")
+        .attr(
+          "x",
+          (d) => xScale(d.time) - width / (this.chartData.length - 1) + 5
+        )
+        .attr("y", 0)
+        .attr("width", width / (this.chartData.length - 1))
+        .attr("height", height);
       hoverGroups
         .append("circle")
         .attr("class", `dot positive`)
@@ -95,16 +112,6 @@ export default {
         .attr("cx", dataX)
         .attr("cy", dataYNegative)
         .attr("r", 5);
-      hoverGroups
-        .append("rect")
-        .attr("class", "rect")
-        .attr(
-          "x",
-          (d) => xScale(d.time) - width / (this.chartData.length - 1) + 10
-        )
-        .attr("y", 0)
-        .attr("width", width / (this.chartData.length - 1))
-        .attr("height", height);
     },
   },
 };
@@ -134,18 +141,19 @@ export default {
 }
 #d3Graph .hoverGroup .rect {
   cursor: pointer;
-  fill: rgba(0, 0, 0, 0.05);
-  transition: 0.1s;
   stroke-width: 1;
-  z-index: 1;
+  stroke: rgb(0, 0, 0);
+  fill: url(#stripe-pattern);
+  opacity: 0;
+  transition: 0.1s;
 }
 #d3Graph .hoverGroup:hover .rect {
-  fill: rgba(0, 0, 0, 0.15);
+  opacity: 0.2;
 }
-#d3Graph .hoverGroup:hover .dot.positive {
+#d3Graph .hoverGroup:hover .positive {
   fill: rgb(55, 180, 76);
 }
-#d3Graph .hoverGroup:hover .dot.negative {
+#d3Graph .hoverGroup:hover .negative {
   fill: #ff1744;
 }
 </style>

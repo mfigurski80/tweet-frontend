@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <LineGraph :chartData="points" />
+    <LineGraph :chartData="points" :onSelect="onSelect" />
   </div>
 </template>
 
@@ -25,7 +25,13 @@ export default {
       { time: 13 * 3600, total: 19, negative: 10, positive: 7 },
       { time: 14 * 3600, total: 19, negative: 12, positive: 5 },
     ],
+    selected: null,
   }),
+  methods: {
+    onSelect(d) {
+      alert(`clicked point at ${d.time}`);
+    },
+  },
 };
 </script>
 

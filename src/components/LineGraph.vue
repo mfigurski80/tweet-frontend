@@ -9,7 +9,7 @@ export default {
   name: "LineGraph",
   props: ["chartData"],
   data: () => ({
-    m: { top: 40, bottom: 20, left: 0, right: 0 },
+    m: { top: 40, bottom: 20, left: 0, right: 10 },
     selected: -1,
   }),
   mounted() {
@@ -25,9 +25,9 @@ export default {
     },
     getScales(width, height) {
       const xRange = [this.chartData[0].time, this.chartData.slice(-1)[0].time];
-      xRange[1] += Math.floor(
-        (xRange[1] - xRange[0]) / (this.chartData.length - 1)
-      );
+      // xRange[1] += Math.floor(
+      //   (xRange[1] - xRange[0]) / (this.chartData.length - 1)
+      // );
       const yMax =
         this.chartData.reduce((max, d) => {
           let highest = d.positive > d.negative ? d.positive : d.negative;
@@ -98,9 +98,12 @@ export default {
       hoverGroups
         .append("rect")
         .attr("class", "rect")
-        .attr("x", dataX)
+        .attr(
+          "x",
+          (d) => xScale(d.time) - width / (this.chartData.length - 1) + 10
+        )
         .attr("y", 0)
-        .attr("width", width / this.chartData.length)
+        .attr("width", width / (this.chartData.length - 1))
         .attr("height", height);
     },
   },

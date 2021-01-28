@@ -1,20 +1,14 @@
 <template>
-  <div>
-    <StripePattern />
-    <div id="d3Graph"></div>
-  </div>
+  <div id="d3Graph"></div>
 </template>
 
 <script>
 import * as d3 from "d3";
-import StripePattern from "./StripePattern.vue";
 
 export default {
   name: "LineGraph",
   props: ["chartData", "onSelect"],
-  components: {
-    StripePattern,
-  },
+
   data: () => ({
     m: { top: 40, bottom: 20, left: 0, right: 20 },
     selected: -1,
@@ -67,14 +61,6 @@ export default {
         .append("g")
         .attr("transform", `translate(${this.m.left}, ${this.m.top})`);
 
-      // axis append
-      svg
-        .append("g")
-        .attr("class", "x axis")
-        .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(xScale).ticks(4, "s").tickSize(0));
-      // svg.append("g").attr("class", "y axis").call(d3.axisLeft(yScale));
-
       // draw lines
       const dataX = (d) => xScale(d.time);
       const dataYNegative = (d) => yScale(d.negative);
@@ -112,6 +98,27 @@ export default {
         .attr("cx", dataX)
         .attr("cy", dataYNegative)
         .attr("r", 5);
+
+      // axis append
+      svg
+        .append("rect")
+        .attr("class", "y-axis-background")
+        .attr("height", height);
+      svg
+        .append("g")
+        .attr("class", "x axis")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(xScale).ticks(4, "s").tickSize(0))
+        .select(".domain")
+        .remove();
+      svg
+        .append("g")
+        .attr("class", "y axis")
+        .call(
+          d3.axisRight(yScale).ticks(5, "s").tickSizeOuter(0).tickSizeInner(20)
+        )
+        .select(".domain")
+        .remove();
     },
   },
 };
@@ -123,6 +130,7 @@ export default {
   min-height: 400px;
   overflow: show;
 }
+/* Lines and Dots */
 #d3Graph .line {
   fill: none !important;
   stroke-width: 3;
@@ -139,6 +147,7 @@ export default {
 #d3Graph .negative {
   stroke: #ff1744;
 }
+/* Hover Groups */
 #d3Graph .hoverGroup .rect {
   cursor: pointer;
   stroke-width: 1;
@@ -155,5 +164,14 @@ export default {
 }
 #d3Graph .hoverGroup:hover .negative {
   fill: #ff1744;
+}
+/* Axis */
+#d3Graph .axis {
+  pointer-events: none;
+}
+#d3Graph .y-axis-background {
+  fill: url(#vertical-gradient);
+  pointer-events: none;
+  width: 100px;
 }
 </style>

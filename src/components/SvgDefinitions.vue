@@ -1,6 +1,13 @@
 <template>
-  <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <svg
+    id="main"
+    height="10"
+    width="10"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+  >
     <defs>
+      <!-- Stripe pattern: #strip-pattern -->
       <pattern
         id="stripe-pattern"
         patternUnits="userSpaceOnUse"
@@ -15,12 +22,32 @@
           height="10"
         ></image>
       </pattern>
+      <!-- Vertical Linear Gradient: #vertical-gradient -->
+      <linearGradient id="vertical-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+        <stop offset="10%" class="stop-left" />
+        <stop offset="100%" class="stop-right" />
+      </linearGradient>
     </defs>
   </svg>
 </template>
 
 <script>
 export default {
-  name: "StripePattern",
+  name: "SvgDefinitions",
 };
 </script>
+
+<style scoped>
+#main {
+  position: absolute;
+  opacity: 0;
+}
+.stop-left {
+  stop-color: white;
+  stop-opacity: 1;
+}
+.stop-right {
+  stop-color: white;
+  stop-opacity: 0;
+}
+</style>

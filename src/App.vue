@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import LineGraph from "./components/lineGraph.vue";
+import LineGraph from "./components/LineGraph.vue";
 
 export default {
   name: "App",
@@ -14,11 +14,16 @@ export default {
   },
   data: () => ({
     points: [
-      { time: 5, total: 11, negative: 5, positive: 4 },
-      { time: 10, total: 10, negative: 4, positive: 3 },
-      { time: 15, total: 20, negative: 7, positive: 7 },
-      { time: 20, total: 15, negative: 10, positive: 4 },
-      { time: 25, total: 19, negative: 11, positive: 4 },
+      { time: 5 * 3600, total: 11, negative: 6, positive: 4 },
+      { time: 6 * 3600, total: 10, negative: 4, positive: 3 },
+      { time: 7 * 3600, total: 20, negative: 6, positive: 7 },
+      { time: 8 * 3600, total: 15, negative: 10, positive: 4 },
+      { time: 9 * 3600, total: 19, negative: 7, positive: 5 },
+      { time: 10 * 3600, total: 19, negative: 6, positive: 8 },
+      { time: 11 * 3600, total: 19, negative: 9, positive: 8 },
+      { time: 12 * 3600, total: 19, negative: 11, positive: 9 },
+      { time: 13 * 3600, total: 19, negative: 10, positive: 7 },
+      { time: 14 * 3600, total: 19, negative: 12, positive: 5 },
     ],
   }),
 };

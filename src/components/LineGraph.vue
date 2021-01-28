@@ -46,17 +46,6 @@ export default {
         .attr("class", `line ${className}`)
         .attr("d", line);
     },
-    addPoints(canvas, dataX, dataY, datum, className) {
-      canvas
-        .selectAll(`.dot.${className.replace(" ", ".")}`)
-        .data(datum)
-        .enter()
-        .append("circle")
-        .attr("class", `dot ${className}`)
-        .attr("cx", dataX)
-        .attr("cy", dataY)
-        .attr("r", 5);
-    },
     drawGraph() {
       const [width, height] = this.getDim();
       const [xScale, yScale] = this.getScales(width, height);
@@ -85,16 +74,30 @@ export default {
       const dataYPositive = (d) => yScale(d.positive);
       this.addLine(svg, dataX, dataYNegative, this.chartData, "negative");
       this.addLine(svg, dataX, dataYPositive, this.chartData, "positive");
-      this.addPoints(svg, dataX, dataYNegative, this.chartData, "negative");
-      this.addPoints(svg, dataX, dataYPositive, this.chartData, "positive");
 
-      // add hover areas
-      svg
-        .selectAll(".hoverArea")
+      // add hover groups
+      const hoverGroups = svg
+        .selectAll("hoverGroup")
         .data(this.chartData)
         .enter()
+        .append("g")
+        .attr("class", "hoverGroup");
+
+      hoverGroups
+        .append("circle")
+        .attr("class", `dot positive`)
+        .attr("cx", dataX)
+        .attr("cy", dataYPositive)
+        .attr("r", 5);
+      hoverGroups
+        .append("circle")
+        .attr("class", `dot negative`)
+        .attr("cx", dataX)
+        .attr("cy", dataYNegative)
+        .attr("r", 5);
+      hoverGroups
         .append("rect")
-        .attr("class", "hoverArea")
+        .attr("class", "rect")
         .attr("x", dataX)
         .attr("y", 0)
         .attr("width", width / this.chartData.length)
@@ -118,6 +121,7 @@ export default {
   stroke-width: 3;
   fill: white;
   stroke: blue;
+  transition: 0.1s;
 }
 #d3Graph .positive {
   stroke: rgb(55, 180, 76);
@@ -125,13 +129,20 @@ export default {
 #d3Graph .negative {
   stroke: #ff1744;
 }
-#d3Graph .hoverArea {
+#d3Graph .hoverGroup .rect {
   cursor: pointer;
-  fill: rgba(0, 0, 0, 0);
+  fill: rgba(0, 0, 0, 0.05);
   transition: 0.1s;
   stroke-width: 1;
+  z-index: 1;
 }
-#d3Graph .hoverArea:hover {
-  fill: rgba(0, 0, 0, 0.2);
+#d3Graph .hoverGroup:hover .rect {
+  fill: rgba(0, 0, 0, 0.15);
+}
+#d3Graph .hoverGroup:hover .dot.positive {
+  fill: rgb(55, 180, 76);
+}
+#d3Graph .hoverGroup:hover .dot.negative {
+  fill: #ff1744;
 }
 </style>

@@ -1,12 +1,7 @@
 <template>
-  <div id="main">
+  <div>
+    <div style="display: None">{{ chartData }}</div>
     <div id="d3PieChart"></div>
-    <div>
-      <h2>Total: {{ chartData.total }}</h2>
-      <h3>Positive: {{ chartData.positive }}</h3>
-      <h3>Negative: {{ chartData.negative }}</h3>
-      <h3>Retweets: {{ chartData.retweets }}</h3>
-    </div>
   </div>
 </template>
 
@@ -69,8 +64,10 @@ export default {
 
 <style>
 #d3PieChart {
-  height: 40vh;
-  margin: 20px;
+  min-height: 200px;
+  min-width: 200px;
+  max-height: 400px;
+  max-width: 400px;
   /* width: 400px;
   height: 400px; */
 }
@@ -82,11 +79,5 @@ export default {
 }
 #d3PieChart .total {
   fill: #eee;
-}
-</style>
-<style scoped>
-#main {
-  display: flex;
-  padding: 30px 50px;
 }
 </style>

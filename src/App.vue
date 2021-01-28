@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <SvgDefinitions />
-    <LineGraph :chartData="points" :onSelect="onSelect" />
-    <div id="details" v-if="details !== null">
-      <PieChart :chartData="details" />
-    </div>
+    <svg-definitions />
+    <line-graph :chartData="points" :onSelect="onSelect" />
+    <column-layout v-if="details !== null">
+      <pie-chart :chartData="details" />
+      <h2>Hello world and welcome back</h2>
+    </column-layout>
   </div>
 </template>
 
 <script>
 import SvgDefinitions from "./components/SvgDefinitions.vue";
 import LineGraph from "./components/LineGraph.vue";
+import ColumnLayout from "./components/ColumnLayout.vue";
 import PieChart from "./components/PieChart.vue";
 
 export default {
@@ -18,6 +20,7 @@ export default {
   components: {
     SvgDefinitions,
     LineGraph,
+    ColumnLayout,
     PieChart,
   },
   data: () => ({
@@ -45,6 +48,7 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap");
 * {
   margin: 0;
   padding: 0;

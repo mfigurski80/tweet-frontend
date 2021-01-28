@@ -18,19 +18,27 @@ export default {
     window.addEventListener("resize", this.drawGraph);
   },
   methods: {
+    prepareData() {
+      return this.chartData.map((d, i) => ({
+        time: d.time,
+        positive: d.positive,
+        negative: d.negative,
+        i,
+      }));
+    },
     getDim() {
       return [
         window.innerWidth - this.m.left - this.m.right,
         500 - this.m.top - this.m.bottom - 6,
       ];
     },
-    getScales(width, height) {
-      const xRange = [this.chartData[0].time, this.chartData.slice(-1)[0].time];
+    getScales(data, width, height) {
+      const xRange = [data[0].time, data.slice(-1)[0].time];
       // xRange[1] += Math.floor(
-      //   (xRange[1] - xRange[0]) / (this.chartData.length - 1)
+      //   (xRange[1] - xRange[0]) / (data.length - 1)
       // );
       const yMax =
-        this.chartData.reduce((max, d) => {
+        data.reduce((max, d) => {
           let highest = d.positive > d.negative ? d.positive : d.negative;
           return max > highest ? max : highest;
         }, 0) * 1.1;
@@ -47,9 +55,18 @@ export default {
         .attr("class", `line ${className}`)
         .attr("d", line);
     },
+    formatDate(t) {
+      return new Date(t * 1000).toLocaleString();
+    },
+    onSelectPoint(e, d) {
+      this.selected = d.i;
+      this.drawGraph();
+      this.onSelect(d.i);
+    },
     drawGraph() {
+      const chartData = this.prepareData();
       const [width, height] = this.getDim();
-      const [xScale, yScale] = this.getScales(width, height);
+      const [xScale, yScale] = this.getScales(chartData, width, height);
 
       // make canvas
       d3.selectAll("#d3Graph > *").remove();
@@ -65,26 +82,26 @@ export default {
       const dataX = (d) => xScale(d.time);
       const dataYNegative = (d) => yScale(d.negative);
       const dataYPositive = (d) => yScale(d.positive);
-      this.addLine(svg, dataX, dataYNegative, this.chartData, "negative");
-      this.addLine(svg, dataX, dataYPositive, this.chartData, "positive");
+      this.addLine(svg, dataX, dataYNegative, chartData, "negative");
+      this.addLine(svg, dataX, dataYPositive, chartData, "positive");
 
       // add hover groups backgrounds
       const hoverGroups = svg
         .selectAll("hoverGroup")
-        .data(this.chartData)
+        .data(chartData)
         .enter()
         .append("g")
-        .attr("class", "hoverGroup")
-        .on("click", (e, d) => this.onSelect(d));
+        .attr(
+          "class",
+          (d) => `hoverGroup ${this.selected === d.i ? "selected" : ""}`
+        )
+        .on("click", this.onSelectPoint);
       hoverGroups
         .append("rect")
         .attr("class", "rect")
-        .attr(
-          "x",
-          (d) => xScale(d.time) - width / (this.chartData.length - 1) + 5
-        )
+        .attr("x", (d) => xScale(d.time) - width / (chartData.length - 1) + 6)
         .attr("y", 0)
-        .attr("width", width / (this.chartData.length - 1))
+        .attr("width", width / (chartData.length - 1))
         .attr("height", height);
       hoverGroups
         .append("circle")
@@ -108,7 +125,9 @@ export default {
         .append("g")
         .attr("class", "x axis")
         .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(xScale).ticks(4, "s").tickSize(0))
+        .call(
+          d3.axisBottom(xScale).ticks(4).tickFormat(this.formatDate).tickSize(0)
+        )
         .select(".domain")
         .remove();
       svg
@@ -139,7 +158,6 @@ export default {
   stroke-width: 3;
   fill: white;
   stroke: blue;
-  transition: 0.1s;
 }
 #d3Graph .positive {
   stroke: rgb(55, 180, 76);
@@ -151,10 +169,9 @@ export default {
 #d3Graph .hoverGroup .rect {
   cursor: pointer;
   stroke-width: 1;
-  stroke: rgb(0, 0, 0);
+  stroke: none;
   fill: url(#stripe-pattern);
   opacity: 0;
-  transition: 0.1s;
 }
 #d3Graph .hoverGroup:hover .rect {
   opacity: 0.2;
@@ -164,6 +181,11 @@ export default {
 }
 #d3Graph .hoverGroup:hover .negative {
   fill: #ff1744;
+}
+/* SELECTED Hover Groups */
+#d3Graph .hoverGroup.selected .rect {
+  stroke: rgb(0, 0, 0);
+  opacity: 0.2;
 }
 /* Axis */
 #d3Graph .axis {

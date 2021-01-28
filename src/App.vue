@@ -31,8 +31,8 @@ export default {
     selected: null,
   }),
   methods: {
-    onSelect(d) {
-      alert(`clicked point at ${d.time}`);
+    onSelect(i) {
+      console.log(`clicked point at ${i}`);
     },
   },
 };

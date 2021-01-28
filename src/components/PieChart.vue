@@ -1,7 +1,12 @@
 <template>
-  <div>
-    <div style="display: None">{{ chartData }}</div>
+  <div id="main">
     <div id="d3PieChart"></div>
+    <div>
+      <h2>Total: {{ chartData.total }}</h2>
+      <h3>Positive: {{ chartData.positive }}</h3>
+      <h3>Negative: {{ chartData.negative }}</h3>
+      <h3>Retweets: {{ chartData.retweets }}</h3>
+    </div>
   </div>
 </template>
 
@@ -36,23 +41,20 @@ export default {
     },
     drawGraph() {
       const data = this.prepareData();
-      const width = 400;
-      const height = 400;
-      const radius = 200;
 
       // set up canvas
       d3.selectAll("#d3PieChart > *").remove();
       const svg = d3
         .select("#d3PieChart")
         .append("svg")
-        .attr("height", height)
-        .attr("width", width)
-        .attr("viewBox", [-width / 2, -height / 2, width, height]);
+        .attr("height", "100%")
+        .attr("width", "100%")
+        .attr("viewBox", [-1, -1, 2, 2]);
 
       const arc = d3
         .arc()
-        .innerRadius(radius / 2)
-        .outerRadius(radius);
+        .innerRadius(1 / 2)
+        .outerRadius(1);
       svg
         .append("g")
         .selectAll("path")
@@ -66,6 +68,12 @@ export default {
 </script>
 
 <style>
+#d3PieChart {
+  height: 40vh;
+  margin: 20px;
+  /* width: 400px;
+  height: 400px; */
+}
 #d3PieChart .positive {
   fill: rgb(55, 180, 76);
 }
@@ -74,5 +82,11 @@ export default {
 }
 #d3PieChart .total {
   fill: #eee;
+}
+</style>
+<style scoped>
+#main {
+  display: flex;
+  padding: 30px 50px;
 }
 </style>

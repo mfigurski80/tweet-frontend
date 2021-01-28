@@ -17,9 +17,8 @@ export default {
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  background: #f7f7f7;
 }
 /* .column-layout > * {
   flex-grow: 1;

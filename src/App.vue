@@ -4,7 +4,7 @@
     <line-graph :chartData="points" :onSelect="onSelect" />
     <column-layout v-if="details !== null">
       <pie-chart :chartData="details" />
-      <h2>Hello world and welcome back</h2>
+      <Details :data="details" />
     </column-layout>
   </div>
 </template>
@@ -14,6 +14,7 @@ import SvgDefinitions from "./components/SvgDefinitions.vue";
 import LineGraph from "./components/LineGraph.vue";
 import ColumnLayout from "./components/ColumnLayout.vue";
 import PieChart from "./components/PieChart.vue";
+import Details from "./components/Details.vue";
 
 export default {
   name: "App",
@@ -22,6 +23,7 @@ export default {
     LineGraph,
     ColumnLayout,
     PieChart,
+    Details,
   },
   data: () => ({
     points: [

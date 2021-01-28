@@ -1,5 +1,8 @@
 <template>
-  <div id="d3PieChart"></div>
+  <div>
+    <div style="display: None">{{ chartData }}</div>
+    <div id="d3PieChart"></div>
+  </div>
 </template>
 
 <script>
@@ -9,6 +12,9 @@ export default {
   name: "PieChart",
   props: ["chartData"],
   mounted() {
+    this.drawGraph();
+  },
+  updated() {
     this.drawGraph();
   },
   methods: {
@@ -29,13 +35,11 @@ export default {
       ]);
     },
     drawGraph() {
-      console.log("drawing graph");
       const data = this.prepareData();
       const width = 400;
       const height = 400;
       const radius = 200;
 
-      console.log(data);
       // set up canvas
       d3.selectAll("#d3PieChart > *").remove();
       const svg = d3
@@ -44,7 +48,6 @@ export default {
         .attr("height", height)
         .attr("width", width)
         .attr("viewBox", [-width / 2, -height / 2, width, height]);
-      console.log(svg);
 
       const arc = d3
         .arc()

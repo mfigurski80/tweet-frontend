@@ -1,5 +1,8 @@
 <template>
-  <div id="d3Graph"></div>
+  <div>
+    <div style="display: None">{{ chartData }}</div>
+    <div id="d3Graph"></div>
+  </div>
 </template>
 
 <script>
@@ -16,6 +19,9 @@ export default {
   mounted() {
     this.drawGraph();
     window.addEventListener("resize", this.drawGraph);
+  },
+  updated() {
+    this.drawGraph();
   },
   methods: {
     prepareData() {

@@ -23,7 +23,7 @@ export default {
   data: () => ({
     points: [
       { time: 5 * 3600, total: 50000, negative: 6420, positive: 4423 },
-      { time: 6 * 3600, total: 40000, negative: 4320, positive: 3243 },
+      { time: 6 * 3600, total: 10000, negative: 4320, positive: 3243 },
       { time: 7 * 3600, total: 40000, negative: 6892, positive: 7523 },
       { time: 8 * 3600, total: 50000, negative: 10098, positive: 4523 },
       { time: 9 * 3600, total: 40000, negative: 7000, positive: 5552 },

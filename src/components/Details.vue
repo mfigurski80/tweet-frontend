@@ -30,7 +30,7 @@ export default {
 
 <style scoped>
 .details {
-  flex: 1;
+  /* flex: 1; */
   padding: 20px;
 }
 h2 {
@@ -43,6 +43,7 @@ h2 {
   display: inline-block;
   padding: 15px;
   background: #eee;
+  border-radius: 3px;
 }
 h2.positive .number {
   color: rgb(55, 180, 76);

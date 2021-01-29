@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <svg-definitions />
-    <line-graph :chartData="points" :onSelect="onSelect" />
-    <column-layout v-if="details !== null">
-      <pie-chart :chartData="details" />
-      <Details :data="details" />
-    </column-layout>
+    <div v-if="points !== null">
+      <line-graph :chartData="points" :onSelect="onSelect" />
+      <column-layout v-if="details !== null">
+        <pie-chart :chartData="details" />
+        <Details :data="details" />
+      </column-layout>
+    </div>
   </div>
 </template>
 

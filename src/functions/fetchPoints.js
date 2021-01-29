@@ -21,4 +21,5 @@ export default async function fetchPoints(toDate, n, scale = 1) {
     }`)
         .then(resp => resp.json())
         .then(d => d.data.points)
+    // .then(points => points.map(p => { p.time = toTime(p.Time); return p }))
 }

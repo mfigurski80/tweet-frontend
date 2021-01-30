@@ -6,6 +6,7 @@
       <column-layout v-if="details !== null">
         <pie-chart :chartData="details" />
         <Details :data="details" />
+        <Tweets :data="details.tweets" />
       </column-layout>
     </div>
   </div>
@@ -19,6 +20,7 @@ import LineGraph from "./components/LineGraph.vue";
 import ColumnLayout from "./components/ColumnLayout.vue";
 import PieChart from "./components/PieChart.vue";
 import Details from "./components/Details.vue";
+import Tweets from "./components/Tweets.vue";
 
 export default {
   name: "App",
@@ -28,6 +30,7 @@ export default {
     ColumnLayout,
     PieChart,
     Details,
+    Tweets,
   },
   data: () => ({
     points: null,
@@ -64,5 +67,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+a {
+  color: inherit;
 }
 </style>

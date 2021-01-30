@@ -15,11 +15,20 @@ export default async function fetchPoints(toDate, n, scale = 1) {
             tweets {
                 id,
                 text,
-                sentiment
+                username,
+                createdAt,
+                link,
+                sentiment,
+                confidence,
             }
         }
     }`)
         .then(resp => resp.json())
-        .then(d => d.data.points)
+        .then(d => {
+            if (!d.errors) return d;
+            console.error(d.errors);
+            throw d.errors[0];
+        })
+        .then(d => d.data.points);
     // .then(points => points.map(p => { p.time = toTime(p.Time); return p }))
 }

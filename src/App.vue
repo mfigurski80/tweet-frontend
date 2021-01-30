@@ -16,6 +16,7 @@
         <p>🔎 Click to inspect a point and view more information!</p>
       </message>
     </section>
+    <footer-section />
   </div>
 </template>
 
@@ -31,6 +32,7 @@ import Tweets from "./components/Tweets.vue";
 import Message from "./components/Message.vue";
 
 import NavSection from "./components/NavSection.vue";
+import FooterSection from "./components/FooterSection.vue";
 
 export default {
   name: "App",
@@ -43,6 +45,7 @@ export default {
     Tweets,
     Message,
     NavSection,
+    FooterSection,
   },
   data: () => ({
     points: null,
@@ -89,6 +92,11 @@ body {
 
 h1 {
   font-size: 40px;
+}
+p {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  line-height: 24px;
 }
 a {
   color: inherit;

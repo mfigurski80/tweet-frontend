@@ -21,6 +21,12 @@
         changeRelative("negative")
       }}</span>
     </h2>
+    <h2 class="retweets">
+      Retweets: <span class="number">{{ data.retweets }}</span>
+      <span class="change" v-if="!!previousData">{{
+        changeRelative("retweets")
+      }}</span>
+    </h2>
   </div>
 </template>
 

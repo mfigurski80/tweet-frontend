@@ -20,7 +20,8 @@ export default {
   justify-content: space-around;
   align-items: top;
 }
-/* .column-layout > * {
-  flex-grow: 1;
-} */
+.column-layout > * {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 </style>

@@ -36,6 +36,7 @@ export async function fetchPoints(toDate, n, scale = 1) {
         points(from:${from},to:${to}) {
             time,
             total,
+            retweets,
             negative,
             positive,
         }

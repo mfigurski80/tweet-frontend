@@ -1,19 +1,25 @@
 <template>
-  <div>
+  <div id="line-graph">
     <div style="display: None">{{ chartData }}</div>
-    <div id="d3Graph"></div>
+    <div v-if="!!chartData" id="d3Graph"></div>
+    <div class="placeholder" v-else>
+      <placeholder />
+    </div>
   </div>
 </template>
 
 <script>
 import * as d3 from "d3";
 
+import Placeholder from "./Placeholder.vue";
+
 export default {
   name: "LineGraph",
   props: ["chartData", "onSelect"],
+  components: { Placeholder },
 
   data: () => ({
-    m: { top: 40, bottom: 20, left: 0, right: 20 },
+    m: { top: 0, bottom: 20, left: 0, right: 20 },
     selected: -1,
   }),
   mounted() {
@@ -70,6 +76,7 @@ export default {
       this.onSelect(d.i);
     },
     drawGraph() {
+      if (!this.chartData) return;
       const chartData = this.prepareData();
       const [width, height] = this.getDim();
       const [xScale, yScale] = this.getScales(chartData, width, height);
@@ -151,9 +158,13 @@ export default {
 
 <style>
 #d3Graph {
-  width: 90vw;
-  min-height: 400px;
+  width: 100vw;
+  height: 500px;
   overflow: show;
+}
+#line-graph .placeholder {
+  width: 100vw;
+  height: 500px;
 }
 /* Lines and Dots */
 #d3Graph .line {

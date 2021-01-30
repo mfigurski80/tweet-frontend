@@ -1,22 +1,20 @@
 <template>
   <div id="app">
     <svg-definitions />
-    <div v-if="points !== null">
-      <line-graph :chartData="points" :onSelect="onSelect" />
-      <column-layout v-if="selected > 0">
-        <pie-chart :chartData="points[selected]" />
-        <Details
-          :data="points[selected]"
-          :previousData="selected > 1 ? points[selected - 1] : null"
-        />
-        <Tweets :data="points[selected].tweets" />
-      </column-layout>
-    </div>
+    <line-graph :chartData="points" :onSelect="onSelect" />
+    <column-layout v-if="selected > 0">
+      <pie-chart :chartData="points[selected]" />
+      <Details
+        :data="points[selected]"
+        :previousData="selected > 1 ? points[selected - 1] : null"
+      />
+      <Tweets :data="selectedTweets" />
+    </column-layout>
   </div>
 </template>
 
 <script>
-import fetchPoints from "./functions/fetchPoints";
+import { fetchPoints, fetchTweets } from "./functions/fetchPoints";
 
 import SvgDefinitions from "./components/SvgDefinitions.vue";
 import LineGraph from "./components/LineGraph.vue";
@@ -38,10 +36,13 @@ export default {
   data: () => ({
     points: null,
     selected: -1,
+    selectedTweets: null,
   }),
   methods: {
-    onSelect(i) {
+    async onSelect(i) {
+      this.selectedTweets = null;
       this.selected = i;
+      this.selectedTweets = await fetchTweets(this.points[i].time);
     },
     async populateData() {
       this.points = await fetchPoints(new Date(), 15);

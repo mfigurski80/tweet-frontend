@@ -8,7 +8,7 @@
         :data="points[selected]"
         :previousData="selected > 1 ? points[selected - 1] : null"
       />
-      <Tweets :data="selectedTweets" />
+      <Tweets :data="tweets[selected]" />
     </column-layout>
   </div>
 </template>
@@ -36,17 +36,22 @@ export default {
   data: () => ({
     points: null,
     selected: -1,
-    selectedTweets: null,
+    tweets: null,
   }),
   methods: {
     async onSelect(i) {
       this.selectedTweets = null;
       this.selected = i;
-      this.selectedTweets = await fetchTweets(this.points[i].time);
+      if (!this.tweets[i]) {
+        console.log(`fetching tweets for point ${i}`);
+        this.tweets[i] = await fetchTweets(this.points[i].time);
+        this.$forceUpdate();
+      }
     },
     async populateData() {
       this.points = await fetchPoints(new Date(), 15);
       this.selected = -1;
+      this.tweets = new Array(15);
     },
   },
   mounted() {

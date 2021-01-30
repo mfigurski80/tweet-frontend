@@ -77,7 +77,7 @@ export default {
   position: relative;
   width: 50%;
   height: 50%;
-  left: 25.2%;
+  left: 25%;
   top: -76.2%;
   border-radius: 50%;
   box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.16),

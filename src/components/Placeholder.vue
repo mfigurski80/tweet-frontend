@@ -31,10 +31,12 @@ export default {
   background: white;
   transform: skew(-25deg);
   z-index: -1;
+  left: -200px;
   animation-name: scroll;
   animation-duration: 2s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  animation-delay: 4s;
   /* animation: scroll 4s repeat; */
 }
 

@@ -100,5 +100,7 @@ export default {
   width: 450px;
   height: 200px;
   margin: 15px 0;
+  border-radius: 2px;
+  overflow: hidden;
 }
 </style>

@@ -10,6 +10,9 @@
       />
       <Tweets :data="tweets[selected]" />
     </column-layout>
+    <message v-else>
+      <p>🔎 Click to inspect a point and view more information!</p>
+    </message>
   </div>
 </template>
 
@@ -22,6 +25,7 @@ import ColumnLayout from "./components/ColumnLayout.vue";
 import PieChart from "./components/PieChart.vue";
 import Details from "./components/Details.vue";
 import Tweets from "./components/Tweets.vue";
+import Message from "./components/Message.vue";
 
 export default {
   name: "App",
@@ -32,6 +36,7 @@ export default {
     PieChart,
     Details,
     Tweets,
+    Message,
   },
   data: () => ({
     points: null,

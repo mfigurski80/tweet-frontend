@@ -1,5 +1,5 @@
 <template>
-  <div class="tweets">
+  <div class="tweets" v-if="!!data">
     <div class="tweet" :class="t.sentiment" v-for="t in data" :key="t.id">
       <div class="group head">
         <a
@@ -22,12 +22,20 @@
       </div>
     </div>
   </div>
+  <div class="placeholders" v-else>
+    <div class="placeholder-tweet" v-for="i in [0, 1]" :key="i">
+      <placeholder />
+    </div>
+  </div>
 </template>
 
 <script>
+import Placeholder from "./Placeholder.vue";
+
 export default {
   name: "Tweets",
   props: ["data"],
+  components: { Placeholder },
 };
 </script>
 
@@ -86,5 +94,11 @@ export default {
 .confidence .number {
   font-size: 20px;
   font-weight: bold;
+}
+
+.placeholder-tweet {
+  width: 450px;
+  height: 200px;
+  margin: 15px 0;
 }
 </style>

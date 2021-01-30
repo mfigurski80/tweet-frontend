@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <svg-definitions />
-    <line-graph :chartData="points" :onSelect="onSelect" />
-    <column-layout v-if="selected > 0">
-      <pie-chart :chartData="points[selected]" />
-      <Details
-        :data="points[selected]"
-        :previousData="selected > 1 ? points[selected - 1] : null"
-      />
-      <Tweets :data="tweets[selected]" />
-    </column-layout>
-    <message v-else>
-      <p>🔎 Click to inspect a point and view more information!</p>
-    </message>
+    <nav-section />
+    <section id="charts">
+      <svg-definitions />
+      <line-graph :chartData="points" :onSelect="onSelect" />
+      <column-layout v-if="selected > 0">
+        <pie-chart :chartData="points[selected]" />
+        <Details
+          :data="points[selected]"
+          :previousData="selected > 1 ? points[selected - 1] : null"
+        />
+        <Tweets :data="tweets[selected]" />
+      </column-layout>
+      <message v-else>
+        <p>🔎 Click to inspect a point and view more information!</p>
+      </message>
+    </section>
   </div>
 </template>
 
@@ -27,6 +30,8 @@ import Details from "./components/Details.vue";
 import Tweets from "./components/Tweets.vue";
 import Message from "./components/Message.vue";
 
+import NavSection from "./components/NavSection.vue";
+
 export default {
   name: "App",
   components: {
@@ -37,6 +42,7 @@ export default {
     Details,
     Tweets,
     Message,
+    NavSection,
   },
   data: () => ({
     points: null,
@@ -74,15 +80,16 @@ export default {
 }
 body {
   overflow-x: hidden;
-}
-
-#app {
+  background: white;
+  color: #2c3e50;
   font-family: Montserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
 }
 
+h1 {
+  font-size: 40px;
+}
 a {
   color: inherit;
 }

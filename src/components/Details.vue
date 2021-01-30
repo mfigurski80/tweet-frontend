@@ -7,15 +7,19 @@
     </h2>
     <h2 class="total">
       Total: <span class="number">{{ data.total }}</span>
-      <span class="change">{{ change("total") }}</span>
+      <span class="change" v-if="!!previousData">{{ change("total") }}</span>
     </h2>
     <h2 class="positive">
       Positive: <span class="number">{{ data.positive }}</span>
-      <span class="change">{{ changeRelative("positive") }}</span>
+      <span class="change" v-if="!!previousData">{{
+        changeRelative("positive")
+      }}</span>
     </h2>
     <h2 class="negative">
       Negative: <span class="number">{{ data.negative }}</span>
-      <span class="change">{{ changeRelative("negative") }}</span>
+      <span class="change" v-if="!!previousData">{{
+        changeRelative("negative")
+      }}</span>
     </h2>
   </div>
 </template>

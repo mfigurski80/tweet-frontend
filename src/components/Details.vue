@@ -31,9 +31,6 @@ export default {
   name: "Details",
   props: ["data", "previousData"],
   methods: {
-    percent(n) {
-      return ((100 * n) / this.data.total).toFixed(2);
-    },
     changeRelative(field) {
       let ch = (
         (this.data[field] /

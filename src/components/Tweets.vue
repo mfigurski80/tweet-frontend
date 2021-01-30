@@ -9,7 +9,15 @@
         >
           @{{ t.username }}
         </a>
-        <p class="time">{{ t.createdAt }}</p>
+        -
+        <a class="time" :href="t.link"
+          >posted at:
+          {{
+            t.createdAt
+              ? toTime(t.createdAt).toLocaleTimeString()
+              : "[not recorded]"
+          }}</a
+        >
       </div>
       <div class="group body">
         <p class="text">{{ t.text }}</p>
@@ -32,10 +40,15 @@
 <script>
 import Placeholder from "./Placeholder.vue";
 
+import { toTime } from "../functions/time";
+
 export default {
   name: "Tweets",
   props: ["data"],
   components: { Placeholder },
+  methods: {
+    toTime,
+  },
 };
 </script>
 
@@ -67,6 +80,10 @@ export default {
 
 .username {
   font-size: 20px;
+}
+.time {
+  font-size: 14px;
+  /* margin: 0 10px; */
 }
 
 .text {

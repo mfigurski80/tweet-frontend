@@ -20,7 +20,8 @@ export async function fetchTweets(atTimestamp) {
             username,
             sentiment,
             confidence,
-            createdAt
+            createdAt,
+            link,
         }
     }`)
         .then(t => t.tweets);

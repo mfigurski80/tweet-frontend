@@ -31,7 +31,7 @@ export default {
   background: white;
   transform: skew(-25deg);
   z-index: -1;
-  left: -200px;
+  left: -300px;
   animation-name: scroll;
   animation-duration: 2s;
   animation-timing-function: linear;
@@ -42,7 +42,7 @@ export default {
 
 @keyframes scroll {
   0% {
-    left: -200px;
+    left: -230px;
   }
   30% {
     left: 130vw;

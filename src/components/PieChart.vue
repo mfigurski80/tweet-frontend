@@ -64,11 +64,33 @@ export default {
 
 <style>
 #d3PieChart {
-  max-height: 3500px;
-  max-width: 3500px;
+  height: 350px;
+  width: 350px;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   /* width: 400px;
   height: 400px; */
 }
+#d3PieChart:after {
+  content: "";
+  display: block;
+  position: relative;
+  width: 50%;
+  height: 50%;
+  left: 25.2%;
+  top: -76.2%;
+  border-radius: 50%;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.16),
+    inset 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+/* #d3PieChart:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+#d3PieChart:hover:after {
+  box-shadow: inset 0 14px 28px rgba(0, 0, 0, 0.25),
+    inset 0 10px 10px rgba(0, 0, 0, 0.22);
+} */
+
 #d3PieChart .positive {
   fill: rgb(55, 180, 76);
 }

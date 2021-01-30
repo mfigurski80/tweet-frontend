@@ -16,8 +16,6 @@ export default async function fetchPoints(toDate, n, scale = 1) {
                 id,
                 text,
                 username,
-                createdAt,
-                link,
                 sentiment,
                 confidence,
             }

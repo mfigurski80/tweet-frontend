@@ -3,7 +3,7 @@
     <div class="layout">
       <div class="title-section">
         <h1 class="tag">#Coronavirus</h1>
-        <h2 class="sub-title">Original Tweet Sentiment Analyzer</h2>
+        <h2 class="sub-title">The Sentimentizer</h2>
       </div>
       <nav class="links-section">
         <a href="#charts">Charts</a>

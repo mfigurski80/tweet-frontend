@@ -27,6 +27,7 @@ export default async function fetchPoints(toDate, n, scale = 1) {
             console.error(d.errors);
             throw d.errors[0];
         })
-        .then(d => d.data.points);
+        .then(d => d.data.points)
+        .then(points => points.map(p => { p.time += 3600; return p }));
     // .then(points => points.map(p => { p.time = toTime(p.Time); return p }))
 }

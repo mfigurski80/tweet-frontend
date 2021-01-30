@@ -17,7 +17,7 @@
       <div class="group footer">
         <p class="sentiment">{{ t.sentiment }}</p>
         <p class="confidence">
-          <span class="number">{{ t.confidence }}%</span> confidence
+          ~ <span class="number">{{ t.confidence }}%</span> confidence
         </p>
       </div>
     </div>

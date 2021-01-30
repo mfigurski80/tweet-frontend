@@ -1,5 +1,10 @@
 <template>
   <div class="details">
+    <h2 class="time">
+      At {{ toTime(data.time).toLocaleTimeString() }} [{{
+        toTime(data.time).toLocaleDateString()
+      }}]
+    </h2>
     <h2 class="total">
       Total: <span class="number">{{ data.total }}</span>
     </h2>
@@ -17,6 +22,8 @@
 </template>
 
 <script>
+import { toTime } from "../functions/time";
+
 export default {
   name: "Details",
   props: ["data"],
@@ -24,6 +31,7 @@ export default {
     percent(n) {
       return ((100 * n) / this.data.total).toFixed(2);
     },
+    toTime: toTime,
   },
 };
 </script>
@@ -37,6 +45,14 @@ h2 {
   font-weight: normal;
   display: block;
   margin: 5px;
+}
+.time {
+  display: inline-block;
+  padding: 8px;
+  margin: 15px 0;
+  border-bottom: 2px solid #eee;
+  font-size: 18px;
+  text-decoration: italic;
 }
 .number {
   font-weight: bold;

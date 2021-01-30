@@ -12,13 +12,13 @@ export default {
 
 <style scoped>
 .column-layout {
-  max-width: 1200px;
-  padding: 20px 10px;
+  max-width: 1300px;
+  padding: 60px 10px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-around;
+  align-items: top;
 }
 /* .column-layout > * {
   flex-grow: 1;

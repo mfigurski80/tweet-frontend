@@ -33,9 +33,7 @@ export default {
 
 <style scoped>
 .tweet {
-  min-width: 200px;
-  max-width: 400px;
-  min-height: 100px;
+  max-width: 500px;
   margin: 15px 0;
   padding: 10px 30px;
   border: 1px solid #eee;

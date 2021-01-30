@@ -64,10 +64,8 @@ export default {
 
 <style>
 #d3PieChart {
-  min-height: 200px;
-  min-width: 200px;
-  max-height: 400px;
-  max-width: 400px;
+  max-height: 3500px;
+  max-width: 3500px;
   /* width: 400px;
   height: 400px; */
 }

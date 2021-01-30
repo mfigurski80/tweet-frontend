@@ -3,10 +3,13 @@
     <svg-definitions />
     <div v-if="points !== null">
       <line-graph :chartData="points" :onSelect="onSelect" />
-      <column-layout v-if="details !== null">
-        <pie-chart :chartData="details" />
-        <Details :data="details" />
-        <Tweets :data="details.tweets" />
+      <column-layout v-if="selected > 0">
+        <pie-chart :chartData="points[selected]" />
+        <Details
+          :data="points[selected]"
+          :previousData="selected > 1 ? points[selected - 1] : null"
+        />
+        <Tweets :data="points[selected].tweets" />
       </column-layout>
     </div>
   </div>
@@ -34,15 +37,15 @@ export default {
   },
   data: () => ({
     points: null,
-    details: null,
+    selected: -1,
   }),
   methods: {
     onSelect(i) {
-      this.details = this.points[i];
+      this.selected = i;
     },
     async populateData() {
       this.points = await fetchPoints(new Date(), 15);
-      this.details = null;
+      this.selected = -1;
     },
   },
   mounted() {

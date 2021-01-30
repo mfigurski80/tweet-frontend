@@ -33,13 +33,14 @@ export default {
 
 <style scoped>
 .tweet {
-  max-width: 500px;
+  max-width: 450px;
   margin: 15px 0;
   padding: 10px 30px;
   border: 1px solid #eee;
   border-radius: 3px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   /* background: #eee; */
+  overflow-wrap: break-word;
   transition: 0.2s;
 }
 .tweet:hover {

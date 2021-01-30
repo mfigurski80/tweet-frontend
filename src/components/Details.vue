@@ -7,16 +7,15 @@
     </h2>
     <h2 class="total">
       Total: <span class="number">{{ data.total }}</span>
+      <span class="change">{{ change("total") }}</span>
     </h2>
     <h2 class="positive">
-      Positive: <span class="number">{{ data.positive }}</span> ({{
-        percent(data.positive)
-      }}%)
+      Positive: <span class="number">{{ data.positive }}</span>
+      <span class="change">{{ changeRelative("positive") }}</span>
     </h2>
     <h2 class="negative">
-      Negative: <span class="number">{{ data.negative }}</span> ({{
-        percent(data.negative)
-      }}%)
+      Negative: <span class="number">{{ data.negative }}</span>
+      <span class="change">{{ changeRelative("negative") }}</span>
     </h2>
   </div>
 </template>
@@ -26,10 +25,29 @@ import { toTime } from "../functions/time";
 
 export default {
   name: "Details",
-  props: ["data"],
+  props: ["data", "previousData"],
   methods: {
     percent(n) {
       return ((100 * n) / this.data.total).toFixed(2);
+    },
+    changeRelative(field) {
+      let ch = (
+        (this.data[field] /
+          this.data.total /
+          (this.previousData[field] / this.previousData.total) -
+          1) *
+        100
+      ).toFixed(1);
+      if (ch > 0) return `↑${ch}%`;
+      return `↓${Math.abs(ch)}%`;
+    },
+    change(field) {
+      let ch = (
+        (this.data[field] / this.previousData[field] - 1) *
+        100
+      ).toFixed(1);
+      if (ch > 0) return `↑${ch}%`;
+      return `↓${Math.abs(ch)}%`;
     },
     toTime: toTime,
   },
@@ -39,17 +57,17 @@ export default {
 <style scoped>
 .details {
   /* flex: 1; */
-  padding: 20px;
+  padding: 0 20px;
 }
 h2 {
   font-weight: normal;
   display: block;
-  margin: 5px;
+  margin: 6px 0;
 }
 .time {
   display: inline-block;
-  padding: 8px;
-  margin: 15px 0;
+  padding: 8px 0;
+  margin-bottom: 15px;
   border-bottom: 2px solid #eee;
   font-size: 18px;
   text-decoration: italic;
@@ -66,5 +84,8 @@ h2.positive .number {
 }
 h2.negative .number {
   color: #ff1744;
+}
+.change {
+  margin: 0 5px;
 }
 </style>

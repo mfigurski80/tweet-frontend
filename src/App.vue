@@ -101,4 +101,25 @@ p {
 a {
   color: inherit;
 }
+
+input {
+  border: none;
+  background: rgba(0, 0, 0, 0.15);
+  color: inherit;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+button,
+.button {
+  border: none;
+  color: inherit;
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+}
 </style>

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { fetchPoints, fetchTweets } from "./functions/fetchPoints";
+import { fetchPoints, fetchTweets } from "./functions/fetchData";
 
 import SvgDefinitions from "./components/SvgDefinitions.vue";
 import LineGraph from "./components/LineGraph.vue";

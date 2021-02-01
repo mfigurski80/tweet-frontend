@@ -1,9 +1,13 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { toTimestamp } from './time';
+
+// Utility functions
 
 const apiBase = 'http://sentiment.mikolaj.space/graphql'
 
 async function graphQuery(text) {
-    return fetch(`${apiBase}?query=${text}`)
+    return fetch(`${apiBase}?identity=${getIdentityToken()}&query=${text}`)
         .then(resp => resp.json())
         .then(d => {
             if (!d.errors) return d;
@@ -11,6 +15,21 @@ async function graphQuery(text) {
         })
         .then(d => d.data)
 }
+
+var identityToken = null
+
+function getIdentityToken() {
+    if (!identityToken) {
+        identityToken = window.localStorage.getItem('identityToken')
+    }
+    if (!identityToken) {
+        identityToken = uuidv4()
+        window.localStorage.setItem('identityToken', identityToken)
+    }
+    return identityToken;
+}
+
+// Actual, exported fetch functions
 
 export async function fetchTweets(atTimestamp) {
     return graphQuery(`query {

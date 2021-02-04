@@ -43,7 +43,8 @@ export async function fetchTweets(atTimestamp) {
             link,
         }
     }`)
-        .then(t => t.tweets);
+        .then(t => t.tweets)
+        .catch(e => alert('Failed to load tweets', e))
     // .then(p => { p.time += 3600; return p })
 }
 
@@ -61,6 +62,7 @@ export async function fetchPoints(toDate, n, scale = 1) {
         }
     }`)
         .then(d => d.points)
+        .catch(e => alert('Failed to load points: ', e))
     // .then(points => points.map(p => { p.time += 3600; return p }));
     // .then(points => points.map(p => { p.time = toTime(p.Time); return p }))
 }

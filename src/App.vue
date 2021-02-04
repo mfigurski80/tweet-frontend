@@ -16,6 +16,7 @@
         <p>🔎 Click to inspect a point and view more information!</p>
       </message>
     </section>
+    <about-section />
     <footer-section />
   </div>
 </template>
@@ -31,8 +32,9 @@ import Details from "./components/Details.vue";
 import Tweets from "./components/Tweets.vue";
 import Message from "./components/Message.vue";
 
-import NavSection from "./components/NavSection.vue";
-import FooterSection from "./components/FooterSection.vue";
+import NavSection from "./components/sections/NavSection.vue";
+import FooterSection from "./components/sections/FooterSection.vue";
+import AboutSection from "./components/sections/AboutSection.vue";
 
 export default {
   name: "App",
@@ -46,6 +48,7 @@ export default {
     Message,
     NavSection,
     FooterSection,
+    AboutSection,
   },
   data: () => ({
     points: null,
@@ -92,6 +95,11 @@ body {
 
 h1 {
   font-size: 40px;
+}
+h1,
+h2,
+h3 {
+  line-height: 50px;
 }
 p {
   margin-top: 6px;

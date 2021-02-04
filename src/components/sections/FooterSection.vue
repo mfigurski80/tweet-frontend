@@ -28,7 +28,7 @@
         </p>
         <p>
           Check out my
-          <a href="meeksfigs.surge.sh">other work</a>
+          <a href="http://meeksfigs.surge.sh">other work</a>
         </p>
       </div>
 

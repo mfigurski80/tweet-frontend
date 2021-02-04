@@ -1,7 +1,13 @@
 <template>
   <div id="line-graph">
     <div style="display: None">{{ chartData }}</div>
-    <div v-if="!!chartData" id="d3Graph"></div>
+    <div v-if="!!chartData">
+      <div id="d3Graph"></div>
+      <div class="legend">
+        <p class="negative legend-marker">negative sentiment tweets</p>
+        <p class="positive legend-marker">positive sentiment tweets</p>
+      </div>
+    </div>
     <div class="placeholder" v-else>
       <placeholder />
     </div>
@@ -159,11 +165,44 @@ export default {
 <style>
 #line-graph {
   padding-bottom: 10px;
+  position: relative;
 }
 #line-graph .placeholder {
   width: 100vw;
   height: 500px;
 }
+
+#line-graph .legend {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  overflow: show;
+  padding: 8px 15px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  pointer-events: none;
+  font-size: 14px;
+}
+#line-graph .positive.legend-marker:before {
+  content: "";
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  /* background: rgb(55, 180, 76); */
+  border-radius: 50%;
+  border: 3px solid rgb(55, 180, 76);
+  margin-right: 6px;
+}
+#line-graph .negative.legend-marker:before {
+  content: "";
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  border: 3px solid #ff1744;
+  margin-right: 6px;
+}
+
 #d3Graph {
   width: 100vw;
   height: 500px;

@@ -3,7 +3,7 @@
     <div class="layout">
       <div class="title-section">
         <h1 class="tag">#Coronavirus</h1>
-        <h2 class="sub-title">A Sentimentrophogajizer</h2>
+        <h2 class="sub-title">Sentiment Dashboard</h2>
       </div>
       <nav class="links-section">
         <a href="#charts">Charts</a>

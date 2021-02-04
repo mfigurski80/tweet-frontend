@@ -102,9 +102,9 @@ h3 {
   line-height: 50px;
 }
 p {
-  margin-top: 6px;
-  margin-bottom: 6px;
-  line-height: 24px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  line-height: 26px;
 }
 a {
   color: inherit;

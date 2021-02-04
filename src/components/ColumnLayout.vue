@@ -13,7 +13,7 @@ export default {
 <style scoped>
 .column-layout {
   max-width: 1300px;
-  padding: 60px 10px;
+  padding: 30px 10px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;

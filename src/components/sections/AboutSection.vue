@@ -50,6 +50,6 @@ export default {
 #about {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0px 10px 30px 10px;
+  padding: 30px 10px 30px 10px;
 }
 </style>

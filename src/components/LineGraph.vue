@@ -157,14 +157,17 @@ export default {
 </script>
 
 <style>
-#d3Graph {
-  width: 100vw;
-  height: 500px;
-  overflow: show;
+#line-graph {
+  padding-bottom: 10px;
 }
 #line-graph .placeholder {
   width: 100vw;
   height: 500px;
+}
+#d3Graph {
+  width: 100vw;
+  height: 500px;
+  overflow: show;
 }
 /* Lines and Dots */
 #d3Graph .line {

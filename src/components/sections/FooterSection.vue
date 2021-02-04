@@ -23,12 +23,15 @@
       <div class="contact">
         <p>
           Want to give feedback? Want access to this data? Want help with making
-          something similar? Would love to hear from you!
-        </p>
-        <div class="contact-links">
+          something similar? Send me an email at:
           <a href="mailto:miko.f80@gmail.com">miko.f80@gmail.com</a>
-        </div>
+        </p>
+        <p>
+          Check out my
+          <a href="meeksfigs.surge.sh">other work</a>
+        </p>
       </div>
+
       <div class="signup">
         <p>Recieve notifications about updates to this project:</p>
         <form @submit="onEmailSubmit">
@@ -125,7 +128,6 @@ export default {
 
 .contact {
   justify-self: center;
-  text-align: center;
 }
 form {
   background: rgba(0, 0, 0, 0.15);

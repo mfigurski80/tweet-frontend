@@ -4,6 +4,11 @@
     <section id="charts">
       <svg-definitions />
       <line-graph :chartData="points" :onSelect="onSelect" />
+      <data-controller
+        :onLeft="onMoveLeft"
+        :onRight="onMoveRight"
+        :rightDisabled="nLeft === 0"
+      />
       <column-layout v-if="selected > 0">
         <pie-chart :chartData="points[selected]" />
         <Details
@@ -23,9 +28,11 @@
 
 <script>
 import { fetchPoints, fetchTweets } from "./functions/fetchData";
+import { toTimestamp } from "./functions/time";
 
 import SvgDefinitions from "./components/SvgDefinitions.vue";
 import LineGraph from "./components/LineGraph.vue";
+import DataController from "./components/DataController.vue";
 import ColumnLayout from "./components/ColumnLayout.vue";
 import PieChart from "./components/PieChart.vue";
 import Details from "./components/Details.vue";
@@ -41,6 +48,7 @@ export default {
   components: {
     SvgDefinitions,
     LineGraph,
+    DataController,
     ColumnLayout,
     PieChart,
     Details,
@@ -54,25 +62,38 @@ export default {
     points: null,
     selected: -1,
     tweets: null,
+    showCount: 15,
+    nLeft: 0,
   }),
   methods: {
     async onSelect(i) {
       this.selectedTweets = null;
       this.selected = i;
       if (!this.tweets[i]) {
-        console.log(`fetching tweets for point ${i}`);
         this.tweets[i] = await fetchTweets(this.points[i].time);
         this.$forceUpdate();
       }
     },
-    async populateData() {
-      this.points = await fetchPoints(new Date(), 15);
+    async populateData(to) {
+      this.points = await fetchPoints(to, this.showCount);
       this.selected = -1;
-      this.tweets = new Array(15);
+      this.tweets = new Array(this.showCount);
+    },
+    onMoveLeft() {
+      this.populateData(this.points[0].time);
+      this.nLeft += 1;
+    },
+    onMoveRight() {
+      if (this.nLeft === 0) {
+        alert("Cannot move dataset further right");
+        return;
+      }
+      this.populateData(this.points.slice(-1)[0].time + 3600 * this.showCount);
+      this.nLeft -= 1;
     },
   },
   mounted() {
-    this.populateData();
+    this.populateData(toTimestamp(new Date()));
   },
 };
 </script>

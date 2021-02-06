@@ -180,6 +180,7 @@ export default {
   padding: 8px 15px;
   background: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
   pointer-events: none;
   font-size: 14px;
 }

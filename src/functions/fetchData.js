@@ -1,7 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { toTimestamp } from './time';
-
 // Utility functions
 
 const apiBase = 'http://sentiment.mikolaj.space/graphql'
@@ -48,8 +46,7 @@ export async function fetchTweets(atTimestamp) {
     // .then(p => { p.time += 3600; return p })
 }
 
-export async function fetchPoints(toDate, n, scale = 1) {
-    const to = toTimestamp(toDate);
+export async function fetchPoints(to, n, scale = 1) {
     const from = to - 3600 * (n + 1) * scale
 
     return graphQuery(`query {
@@ -66,6 +63,7 @@ export async function fetchPoints(toDate, n, scale = 1) {
     // .then(points => points.map(p => { p.time += 3600; return p }));
     // .then(points => points.map(p => { p.time = toTime(p.Time); return p }))
 }
+
 
 // exported mutation functions
 

@@ -22,8 +22,8 @@
       </div>
       <div class="contact">
         <p>
-          Want to give feedback? Want access to this data? Want help with making
-          something similar? Send me an email at:
+          Have any feedback or questions? Want access to this data? Send me an
+          email at:
           <a href="mailto:miko.f80@gmail.com">miko.f80@gmail.com</a>
         </p>
         <p>
@@ -42,7 +42,9 @@
             :disabled="registeredEmail"
           />
           <div class="divider"></div>
-          <button type="submit" :disabled="registeredEmail">Register</button>
+          <button type="submit" :disabled="registeredEmail">
+            {{ registeredEmail ? "Success!" : "Register" }}
+          </button>
         </form>
       </div>
 
@@ -52,6 +54,8 @@
 </template>
 
 <script>
+import { addSubscription } from "../../functions/fetchData";
+
 const expiryDate = new Date("02 30 2021");
 export default {
   name: "FooterSection",
@@ -68,10 +72,19 @@ export default {
     ),
   }),
   methods: {
-    onEmailSubmit() {
-      console.log(this.email);
-      alert("This feature is not yet implemented");
-      this.registeredEmail = true;
+    async onEmailSubmit(e) {
+      e.preventDefault();
+      try {
+        await addSubscription(this.email);
+        this.registeredEmail = true;
+      } catch (e) {
+        if (e.message.includes("Duplicate entry")) {
+          alert("this email has already been registered");
+          this.registeredEmail = true;
+        } else {
+          alert("something went wrong creating your subscription");
+        }
+      }
     },
   },
 };
@@ -164,7 +177,8 @@ button:enabled:hover {
 button:disabled,
 input:disabled {
   cursor: unset;
-  background: rgba(150, 150, 150, 0.2);
+  background: rgb(55, 180, 76, 1);
+  color: #1e2c38;
 }
 
 footer {

@@ -66,3 +66,21 @@ export async function fetchPoints(toDate, n, scale = 1) {
     // .then(points => points.map(p => { p.time += 3600; return p }));
     // .then(points => points.map(p => { p.time = toTime(p.Time); return p }))
 }
+
+// exported mutation functions
+
+export async function addSubscription(email) {
+    return graphQuery(`mutation {
+        subscription(
+            email: "${email}",
+            identity: "${getIdentityToken()}"
+        ) {
+            email,
+            identity
+        }
+    }`)
+        .catch(e => {
+            console.error(e)
+            throw e
+        });
+}

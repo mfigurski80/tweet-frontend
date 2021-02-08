@@ -1,7 +1,7 @@
 <template>
   <div id="footer">
     <div class="layout">
-      <div class="funding">
+      <div class="funding section">
         <p>
           This project will go offline on
           <span class="date">{{ expiryDate.toLocaleDateString() }}</span
@@ -20,7 +20,7 @@
           ></div>
         </div>
       </div>
-      <div class="contact">
+      <div class="contact section">
         <p>
           Have any feedback or questions? Want access to this data? Send me an
           email at:
@@ -32,8 +32,8 @@
         </p>
       </div>
 
-      <div class="signup">
-        <p>Recieve notifications about updates to this project:</p>
+      <div class="signup section">
+        <p>Receive notifications about updates to this project:</p>
         <form @submit="onEmailSubmit">
           <input
             type="email"
@@ -105,7 +105,11 @@ export default {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px 40px;
+  grid-gap: 40px 40px;
+  justify-items: center;
+}
+.layout .section {
+  max-width: 500px;
 }
 
 .date {
@@ -183,10 +187,20 @@ input:disabled {
 
 footer {
   grid-column: 1 / span 3;
+  width: 100%;
 
   padding: 15px 0;
   font-size: 13px;
   /* text-align: center; */
   border-top: 1px solid #253746;
+}
+
+@media screen and (max-width: 1000px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  footer {
+    grid-column: 1;
+  }
 }
 </style>

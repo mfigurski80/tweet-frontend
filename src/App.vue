@@ -91,8 +91,13 @@ export default {
       this.populateData(this.points.slice(-1)[0].time + 3600 * this.showCount);
       this.nLeft -= 1;
     },
+    updateTargetPointCount() {
+      console.log(window.innerWidth);
+      this.showCount = Math.floor(window.innerWidth / 120) + 6;
+    },
   },
   mounted() {
+    this.updateTargetPointCount();
     this.populateData(toTimestamp(new Date()));
   },
 };

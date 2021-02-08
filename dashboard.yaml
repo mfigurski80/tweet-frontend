@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: dashboard
-          image: mfigurski80/tweet-dash:ffde538
+          image: mfigurski80/tweet-dash:b9b3390
           ports:
             - containerPort: 8043
 ---

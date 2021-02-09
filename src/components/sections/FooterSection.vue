@@ -28,7 +28,8 @@
         </p>
         <p>
           Check out my
-          <a href="http://meeksfigs.surge.sh">other work</a>
+          <a href="http://meeksfigs.surge.sh">other work</a>, or take a look at
+          my <a href="http://github.com/mfigurski80">github</a>.
         </p>
       </div>
 

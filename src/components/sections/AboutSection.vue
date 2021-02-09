@@ -37,6 +37,14 @@
       The frontend functionality is enabled by a Golang graphql API and a Vue
       application exposed through an nginx k8 ingress.
     </p>
+    <h2>About Me</h2>
+    <p>
+      Hello, I'm Mikolaj Figurski -- I break things. Currently a student at
+      Emory University doing a double major in Economics and Computer Science,
+      and I want to work somewhere in between Finance and Technology after I
+      graduate. I'm planning on taking my friends on a sailing trip once the
+      pandemic is over.
+    </p>
   </div>
 </template>
 

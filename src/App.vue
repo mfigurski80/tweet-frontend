@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <nav-section />
+    <div id="notice">
+      <p>NOTE: this project is now offline. The data you see here is being randomly generated for a demonstration of previous project functionality. Actual numbers and information are simply the authors' impression of previous results and not indicative of any real trends.</p>
+    </div>
     <section id="charts">
       <svg-definitions />
       <line-graph :chartData="points" :onSelect="onSelect" />
@@ -154,5 +157,13 @@ button,
   cursor: pointer;
   font-family: inherit;
   font-size: 14px;
+}
+
+#notice {
+  max-width: 800px;
+  margin: 10px auto;
+  padding: 15px 30px;
+  background: #fff9c4;
+  color: #424242;
 }
 </style>

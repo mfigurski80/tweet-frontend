@@ -42,7 +42,30 @@ export async function fetchTweets(atTimestamp) {
         }
     }`)
         .then(t => t.tweets)
-        .catch(e => console.error('Failed to load tweets', e))
+        .catch(e => {
+            console.error('Failed to load tweets', e);
+            // return fake data
+            return [
+              {
+                id: 1,
+                text: 'This is a fake tweet',
+                username: 'FakeUser',
+                sentiment: 'positive',
+                confidence: 80.8,
+                createdAt: new Date(2021, 6, 1, 12, 0, 0),
+                link: 'https://twitter.com',
+              },
+              {
+                id: 2,
+                text: 'This is another fake tweet',
+                username: 'FakeUser2',
+                sentiment: 'negative',
+                confidence: 89.2,
+                createdAt: new Date(2021, 6, 1, 12, 0, 0),
+                link: 'https://twitter.com',
+              },
+            ];
+        })
     // .then(p => { p.time += 3600; return p })
 }
 
@@ -59,7 +82,22 @@ export async function fetchPoints(to, n, scale = 1) {
         }
     }`)
         .then(d => d.points)
-        .catch(e => console.error('Failed to load points: ', e))
+        .catch(e => {
+            console.error('Failed to load points: ', e);
+            // return fake data
+            const pattern = [2,3,4,5,3,2];
+            return Array.from({ length: n }, (_, i) => {
+              const baseline = pattern[i % pattern.length];
+              const ret = {
+                time: from + i * 3600 * scale,
+                retweets: (baseline + Math.random()) * 500,
+                negative: (baseline + Math.random()) * 1000,
+                positive: (baseline + Math.random()) * 900,
+              }
+              ret.total = ret.retweets + ret.negative + ret.positive;
+              return ret;
+            })
+        })
     // .then(points => points.map(p => { p.time += 3600; return p }));
     // .then(points => points.map(p => { p.time = toTime(p.Time); return p }))
 }

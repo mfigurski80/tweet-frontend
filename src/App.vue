@@ -92,7 +92,6 @@ export default {
       this.nLeft -= 1;
     },
     updateTargetPointCount() {
-      console.log(window.innerWidth);
       this.showCount = Math.floor(window.innerWidth / 120) + 6;
     },
   },

@@ -90,9 +90,9 @@ export async function fetchPoints(to, n, scale = 1) {
               const baseline = pattern[i % pattern.length];
               const ret = {
                 time: from + i * 3600 * scale,
-                retweets: (baseline + Math.random()) * 500,
-                negative: (baseline + Math.random()) * 1000,
-                positive: (baseline + Math.random()) * 900,
+                retweets: Math.round((baseline + Math.random()) * 500),
+                negative: Math.round((baseline + Math.random()) * 1000),
+                positive: Math.round((baseline + Math.random()) * 900),
               }
               ret.total = ret.retweets + ret.negative + ret.positive;
               return ret;
